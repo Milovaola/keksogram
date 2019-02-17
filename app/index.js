@@ -1,4 +1,3 @@
-import { hello } from './constants'
+import { hello } from './constants';
 
-
-console.log(hello)
+console.log(hello);
