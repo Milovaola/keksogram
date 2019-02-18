@@ -27,5 +27,8 @@
   },
   "pre-commit": [
     "eslint-check"
-  ]
+  ],
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
 }

@@ -1,1 +1,1 @@
-export const hello = 'Hello, i`m your constants';
+// export const hello = 'Hello, i`m your constants';

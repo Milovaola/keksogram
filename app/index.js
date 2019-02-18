@@ -1,3 +1,1 @@
-import { hello } from './constants';
-
-console.log(hello);
+// import { hello } from './constants';
