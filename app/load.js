@@ -1,4 +1,4 @@
-import { renderPictures } from './renderPictures';
+import axios from 'axios';
 
 const onError = errorMessage => {
   let node = document.createElement('div');
@@ -12,10 +12,12 @@ const onError = errorMessage => {
   document.body.insertAdjacentElement('afterbegin', node);
 };
 
-const axios = require('axios');
+const getPosts = () =>
+  axios
+    .get('https://js.dump.academy/kekstagram/data')
+    .then(({ data }) => data)
+    .catch(onError);
 
-axios
-  .get('https://js.dump.academy/kekstagram/data')
-  .then(response => response.json())
-  .then(data => renderPictures(data))
-  .catch(onError);
+export const kekstagramService = {
+  getPosts
+};
