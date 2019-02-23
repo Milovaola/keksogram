@@ -1,3 +1,5 @@
+import { getBigPicture, mainContainer } from './showBigPicture';
+
 const similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const otherPictures = document.querySelector('.pictures');
 
@@ -14,9 +16,15 @@ const renderPicture = picture => {
 
 export const renderPictures = data => {
   let pictureList = document.createDocumentFragment();
+
   for (let i in data) {
     let pictureNode = renderPicture(data[i]);
+
     pictureList.appendChild(pictureNode);
+
+    pictureNode.addEventListener('click', function() {
+      mainContainer.appendChild(getBigPicture(data[i]));
+    });
   }
   otherPictures.appendChild(pictureList);
 };
