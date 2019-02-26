@@ -1,15 +1,20 @@
 import { getBigPicture, mainContainer } from './showBigPicture';
 
-const similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const otherPictures = document.querySelector('.pictures');
+const similarPictureTemplate = $('#picture').html();
+
+const otherPictures = $('.pictures');
 
 const renderPicture = picture => {
-  let pictureElement = similarPictureTemplate.cloneNode(true);
-  let mainPicture = pictureElement.querySelector('img');
-  mainPicture.src = `src/${picture.url}`;
-  pictureElement.querySelector('.picture__likes').textContent = picture.likes;
-  pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
-  pictureElement.appendChild(mainPicture);
+  let pictureElement = $(similarPictureTemplate).clone();
+  let mainPicture = $(pictureElement).find('img');
+  $(mainPicture).attr({ src: `src/${picture.url}` });
+  $(pictureElement)
+    .find('.picture__likes')
+    .text(picture.likes);
+  $(pictureElement)
+    .find('.picture__comments')
+    .text(picture.comments.length);
+  $(pictureElement).append(mainPicture);
 
   return pictureElement;
 };
@@ -20,11 +25,11 @@ export const renderPictures = data => {
   for (let i in data) {
     let pictureNode = renderPicture(data[i]);
 
-    pictureList.appendChild(pictureNode);
+    $(pictureList).append(pictureNode);
 
-    pictureNode.addEventListener('click', function() {
-      mainContainer.appendChild(getBigPicture(data[i]));
+    $(pictureNode).on('click', () => {
+      $(mainContainer).append(getBigPicture(data[i]));
     });
   }
-  otherPictures.appendChild(pictureList);
+  $(otherPictures).append(pictureList);
 };

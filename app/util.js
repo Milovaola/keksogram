@@ -1,23 +1,22 @@
 const ESC_KEYCODE = 27;
 
-export const closeElement = (parentNode, childNode, element) => {
+export const closeElement = (childNode, element) => {
   const onEscRemoveElement = evt => {
     if (evt.keyCode === ESC_KEYCODE && childNode) {
-      parentNode.removeChild(childNode);
+      childNode.remove();
       removeEvent();
     }
   };
   const onButtonClickRemoveElement = () => {
     if (childNode) {
-      parentNode.removeChild(childNode);
+      childNode.remove();
       removeEvent();
     }
   };
   const removeEvent = () => {
-    document.removeEventListener('keydown', onEscRemoveElement);
-    element.removeEventListener('click', onButtonClickRemoveElement);
+    $(document).off('keydown', onEscRemoveElement);
+    $(element).off('click', onButtonClickRemoveElement);
   };
-
-  document.addEventListener('keydown', onEscRemoveElement);
-  element.addEventListener('click', onButtonClickRemoveElement);
+  $(document).on('keydown', onEscRemoveElement);
+  $(element).on('click', onButtonClickRemoveElement);
 };

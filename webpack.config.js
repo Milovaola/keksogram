@@ -27,6 +27,10 @@ module.exports = {
       exclude: /a\.js|node_modules/,
       // Intentionally add errors to webpack instead of warnings.
       failOnError: true
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
     })
   ],
   devServer: {

@@ -1,59 +1,69 @@
 import { closeElement } from './util';
 
 const MAX_COMMENTS = 5;
-const mainContainer = document.querySelector('main');
-const templatePicture = document.querySelector('.big-picture');
+const mainContainer = $('main');
+const templatePicture = $('.big-picture');
 
 const getBigPicture = data => {
-  const bigPicture = templatePicture.cloneNode(true);
-  bigPicture.classList.remove('hidden');
-  const commentsList = bigPicture.querySelector('.social__comments');
-  const commentNode = bigPicture.querySelector('.social__comment');
-  const closePicture = bigPicture.querySelector('.big-picture__cancel');
-  const commentsLoaderButton = bigPicture.querySelector('.comments-loader');
-  const countString = bigPicture.querySelector('.social__comment-count');
+  const bigPicture = templatePicture.clone();
+  $(bigPicture).removeClass('hidden');
+  const commentsList = $(bigPicture).find('.social__comments');
+  const commentNode = $(bigPicture).find('.social__comment');
+  const closePicture = $(bigPicture).find('.big-picture__cancel');
+  const commentsLoaderButton = $(bigPicture).find('.comments-loader');
+  const countString = $(bigPicture).find('.social__comment-count');
 
-  bigPicture.querySelector('img').src = `src/${data.url}`;
-  bigPicture.querySelector('.likes-count').textContent = data.likes;
+  $(bigPicture)
+    .find('.big-picture__img img')
+    .attr({ src: `src/${data.url}` });
+  $(bigPicture)
+    .find('.likes-count')
+    .text(data.likes);
 
   const openComments = commentsObj => {
     let commentsCounter = 0; // Offset counter
 
-    commentsList.innerHTML = ''; // clear container node
+    commentsList.html(''); // clear container node
 
     renderCommentNodeList(commentsList, getMoreComments(commentsObj, commentsCounter), commentNode);
     commentsCounter += MAX_COMMENTS;
     getCommentsCount(countString, commentsObj, commentsCounter);
 
-    commentsLoaderButton.addEventListener('click', () => {
+    $(commentsLoaderButton).on('click', () => {
       renderCommentNodeList(commentsList, getMoreComments(commentsObj, commentsCounter), commentNode);
       commentsCounter += MAX_COMMENTS;
       getCommentsCount(countString, commentsObj, commentsCounter);
 
       if (commentsCounter >= commentsObj.comments.length) {
-        commentsLoaderButton.classList.add('hidden');
+        $(commentsLoaderButton).addClass('hidden');
       }
     });
   };
 
   openComments(data);
-  bigPicture.querySelector('.social__caption').innerHTML = data.description;
+  $(bigPicture)
+    .find('.social__caption')
+    .html(data.description);
 
-  closeElement(mainContainer, bigPicture, closePicture);
+  closeElement(bigPicture, closePicture);
 
   return bigPicture;
 };
 
 const renderComment = (node, comment) => {
-  node.querySelector('.social__picture').src = `src/${comment.avatar}`;
-  node.querySelector('.social__text').textContent = comment.message;
+  $(node)
+    .find('.social__picture')
+    .attr({ src: `src/${comment.avatar}` });
+  $(node)
+    .find('.social__text')
+    .text(comment.message);
 
-  return node;
+  return node.first();
 };
 
 const renderCommentNodeList = (node, comments, commentNode) => {
   for (let i in comments) {
-    node.appendChild(renderComment(commentNode.cloneNode(true), comments[i]));
+    $(node).append(renderComment($(commentNode).clone(), comments[i]));
   }
 };
 
@@ -75,7 +85,7 @@ const getCommentsCount = (node, { comments }, currentCount) => {
     availableNumberComments = currentCount - (currentCount - comments.length);
   }
 
-  node.innerHTML = `${availableNumberComments} из <span class="comments-count">${comments.length}</span> комментариев`;
+  $(node).html(`${availableNumberComments} из <span class="comments-count">${comments.length}</span> комментариев`);
 };
 
 export { mainContainer, getBigPicture };
