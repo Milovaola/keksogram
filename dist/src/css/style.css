@@ -542,6 +542,8 @@ main {
   display: block;
   max-width: 600px;
   max-height: 600px;
+  transform: scale;
+  /* transform: scale(0.100); */
 }
 
 
@@ -553,22 +555,18 @@ main {
   position: absolute;
   bottom: 10px;
   left: 50%;
-
   width: 495px;
   height: 33px;
-
   font-size: 12px;
   line-height: 42px;
   text-align: center;
   color: #ffffff;
   white-space: nowrap;
-
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 33px;
-
   -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 .effect-level__value {
@@ -614,10 +612,8 @@ main {
 
 .effect-level__depth {
   position: absolute;
-
   width: 20%;
   height: 100%;
-
   background-color: #ffe753;
 }
 
@@ -700,12 +696,12 @@ main {
 
 .effects__preview--chrome {
   -webkit-filter: grayscale(1);
-          filter: grayscale(1);
+  /* filter: grayscale(1); */
 }
 
 .effects__preview--sepia {
   -webkit-filter: sepia(1);
-          filter: sepia(1);
+  filter: sepia(1);
 }
 
 .effects__preview--marvin {
