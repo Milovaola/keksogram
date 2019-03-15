@@ -14,6 +14,19 @@ export const popupUploadFoto = () => {
   initEffectIntensity();
   initChangeSize();
   initEffectChange();
-
+  // hashtagСheck();
   closeElement(popupCreateFoto, closePopupUpladFoto);
 };
+
+// const hashtagСheck = hashtag => {
+//   const inputHashtag = $('.text__hashtags');
+//   if (inputHashtag.length > 0) {
+//     const charMatch = new RegExp('/(?:^|s)(?:#)([a-zA-Zd]+)/i');
+//     if (hashtag.length < 2) {
+//       return inputHashtag.setCustomValidity('Поле не может содержать только хештег');
+//     }
+//     if (hashtag.length > 12) return false;
+//     if (!charMatch.test(hashtag)) return false;
+//     return true;
+//   }
+// };

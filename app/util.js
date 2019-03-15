@@ -1,6 +1,6 @@
 const ESC_KEYCODE = 27;
 
-export const closeElement = (childNode, element) => {
+const closeElement = (childNode, element) => {
   const onEscRemoveElement = evt => {
     if (evt.keyCode === ESC_KEYCODE && childNode) {
       childNode.remove();
@@ -20,3 +20,19 @@ export const closeElement = (childNode, element) => {
   $(document).on('keydown', onEscRemoveElement);
   $(element).on('click', onButtonClickRemoveElement);
 };
+
+const debounce = cb => {
+  let DEBOUNCE_INTERVAL = 500;
+  let lastTimeout = null;
+  return function() {
+    let parameters = arguments;
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(() => {
+      cb.apply(null, parameters);
+    }, DEBOUNCE_INTERVAL);
+  };
+};
+
+export { closeElement, debounce };

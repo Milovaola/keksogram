@@ -33,7 +33,6 @@ body {
   line-height: 20px;
   color: #ffffff;
   text-transform: uppercase;
-
   background-color: #232321;
 }
 
@@ -175,7 +174,6 @@ main {
 .img-filters__button:active,
 .img-filters__button--active {
   color: #ff4e4e;
-
   background-color: #ffffff;
   border-radius: 2px;
 }
