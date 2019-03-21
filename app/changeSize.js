@@ -2,29 +2,26 @@ const uploadImage = $('.img-upload__preview');
 
 const scaleControlSmall = $('.scale__control--smaller');
 const scaleControlBig = $('.scale__control--bigger');
-let defaultValue = 100;
-
-const scaleControlValue = $('.scale__control--value').val(`${defaultValue}%`);
-
-const imageReduction = () => {
-  if (defaultValue > 25) {
-    defaultValue -= 25;
-    scaleControlValue.val(`${defaultValue}%`);
-    uploadImage.css('transform', `scale(0.${defaultValue})`);
-  }
-};
-
-const imageZoom = () => {
-  if (defaultValue < 100) {
-    defaultValue += 25;
-    scaleControlValue.val(`${defaultValue}%`);
-    uploadImage.css('transform', `scale(${defaultValue / 100})`);
-  }
-};
+const scaleControlValue = $('.scale__control--value');
 
 const initChangeSize = () => {
-  $(scaleControlSmall).on('click', imageReduction);
-  $(scaleControlBig).on('click', imageZoom);
+  let defaultValue = 100;
+  scaleControlValue.val(`${defaultValue}%`);
+
+  $(scaleControlSmall).on('click', () => {
+    if (defaultValue > 25) {
+      defaultValue -= 25;
+      scaleControlValue.val(`${defaultValue}%`);
+      uploadImage.css('transform', `scale(0.${defaultValue})`);
+    }
+  });
+  $(scaleControlBig).on('click', () => {
+    if (defaultValue < 100) {
+      defaultValue += 25;
+      scaleControlValue.val(`${defaultValue}%`);
+      uploadImage.css('transform', `scale(${defaultValue / 100})`);
+    }
+  });
 };
 
-export { uploadImage, initChangeSize };
+export { scaleControlValue, uploadImage, initChangeSize };

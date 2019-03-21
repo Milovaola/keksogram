@@ -1,6 +1,9 @@
+import { uploadImage, scaleControlValue } from './changeSize';
+
 const effectLine = $('.effect-level__line');
 const effectLevelPin = $(effectLine).find('.effect-level__pin');
 const lineDepthEffect = $('.effect-level__depth');
+const effectLevelValue = $('input.effect-level__value');
 
 const moveAt = evt => {
   const Limits = {
@@ -31,7 +34,6 @@ const onChangeValueEffect = newLocation => {
 };
 
 const handleChangeSaturationEffect = locationPin => {
-  const effectLevelValue = $('input.effect-level__value');
   let effectValue = onChangeValueEffect(locationPin);
   effectLevelValue.attr('value', effectValue);
 
@@ -53,6 +55,15 @@ const onMouseUp = () => {
   $(document).off('mouseup', onMouseUp);
 };
 
+const resetFiltersOnPhoto = () => {
+  scaleControlValue.val('100%');
+  scaleControlValue.attr('value', '100%');
+  lineDepthEffect.css('width', '100%');
+  effectLevelPin.css('left', '100%');
+  uploadImage.removeAttr('style').attr('class', 'img-upload__preview');
+  $('.effect-level').addClass('hidden');
+};
+
 const initEffectIntensity = () => {
   $(effectLevelPin).on('mousedown', evt => {
     moveAt(evt);
@@ -62,4 +73,4 @@ const initEffectIntensity = () => {
   });
 };
 
-export { effectLevelPin, lineDepthEffect, initEffectIntensity };
+export { initEffectIntensity, resetFiltersOnPhoto };

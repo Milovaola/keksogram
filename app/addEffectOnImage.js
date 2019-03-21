@@ -1,6 +1,5 @@
 import { uploadImage } from './changeSize';
-import { effectLevelPin } from './changeEffectIntensity';
-import { lineDepthEffect } from './changeEffectIntensity';
+import { resetFiltersOnPhoto } from './changeEffectIntensity';
 
 const EFFECTS = {
   CHROME: 'chrome',
@@ -44,10 +43,8 @@ const initEffectChange = () => {
   const effectsFields = $('.effects :input');
 
   effectsFields.on('click', e => {
-    lineDepthEffect.css('width', '100%');
-    effectLevelPin.css('left', '100%');
+    resetFiltersOnPhoto();
     handleChangeEffect(e.target.value);
-    uploadImage.removeAttr('style');
   });
 };
 

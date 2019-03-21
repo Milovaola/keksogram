@@ -26,7 +26,12 @@ const getBigPicture = data => {
     commentsList.html(''); // clear container node
 
     renderCommentNodeList(commentsList, getMoreComments(commentsObj, commentsCounter), commentNode);
-    commentsCounter += MAX_COMMENTS;
+    if (commentsObj.comments.length < MAX_COMMENTS) {
+      commentsCounter += commentsObj.comments.length;
+      $(commentsLoaderButton).addClass('hidden');
+    } else {
+      commentsCounter += MAX_COMMENTS;
+    }
     getCommentsCount(countString, commentsObj, commentsCounter);
 
     $(commentsLoaderButton).on('click', () => {

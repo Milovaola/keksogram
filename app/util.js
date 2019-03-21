@@ -35,4 +35,4 @@ const debounce = cb => {
   };
 };
 
-export { closeElement, debounce };
+export { ESC_KEYCODE, closeElement, debounce };
