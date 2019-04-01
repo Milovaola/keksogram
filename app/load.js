@@ -1,35 +1,7 @@
 import axios from 'axios';
-import { ESC_KEYCODE } from './util';
 
-const sendMessage = node => {
-  const messageTemplate = $(node).html();
-  const messageElement = $(messageTemplate).clone();
-  const mainBlock = $('main');
-  messageElement.insertAfter($(mainBlock));
-
-  const onEscRemoveNotify = evt => {
-    if (evt.keyCode === ESC_KEYCODE && messageElement) {
-      messageElement.remove();
-      removeEvent();
-    }
-  };
-
-  const onButtonClickRemoveNotify = () => {
-    if (messageElement) {
-      messageElement.remove();
-      removeEvent();
-    }
-  };
-
-  const removeEvent = () => {
-    $(document).off('keydown', onEscRemoveNotify);
-    $(document).off('click', onButtonClickRemoveNotify);
-  };
-
-  messageElement.removeClass('hidden');
-  $(document).on('keydown', onEscRemoveNotify);
-  $(document).on('click', onButtonClickRemoveNotify);
-};
+import { sendMessage } from './util';
+import { resetFiltersOnPhoto } from './changeEffectIntensity';
 
 const getPosts = () =>
   axios
@@ -37,13 +9,19 @@ const getPosts = () =>
     .then(({ data }) => data)
     .catch(() => sendMessage('#error'));
 
-const sendPost = () =>
+const sendPost = data =>
   axios
-    .post('https://js.dump.academy/kekstagram')
-    .then(data => data)
-    .then(() => sendMessage('#success'))
-    .catch(() => sendMessage('#error'));
+    .post('https://js.dump.academy/kekstagram', data)
+    .then(() => {
+      sendMessage('#success');
+      resetFiltersOnPhoto();
+    })
+    .catch(() => {
+      sendMessage('#error');
+      resetFiltersOnPhoto();
+    });
 
 export const kekstagramService = {
-  getPosts
+  getPosts,
+  sendPost
 };

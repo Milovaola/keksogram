@@ -4,7 +4,8 @@ const similarPictureTemplate = $('#picture').html();
 
 const otherPictures = $('.pictures');
 
-const renderPicture = picture => {
+//Создание миниатюры фото
+const createPictureElement = picture => {
   let pictureElement = $(similarPictureTemplate).clone();
   let mainPicture = $(pictureElement).find('img');
   $(mainPicture).attr({ src: `src/${picture.url}` });
@@ -19,11 +20,12 @@ const renderPicture = picture => {
   return pictureElement;
 };
 
+// Рендер пользовательских фото с сервера
 export const renderPictures = data => {
   let pictureList = document.createDocumentFragment();
 
   for (let i in data) {
-    let pictureNode = renderPicture(data[i]);
+    let pictureNode = createPictureElement(data[i]);
 
     $(pictureList).append(pictureNode);
 

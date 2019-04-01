@@ -5,6 +5,7 @@ const effectLevelPin = $(effectLine).find('.effect-level__pin');
 const lineDepthEffect = $('.effect-level__depth');
 const effectLevelValue = $('input.effect-level__value');
 
+// Передвижение ползунка на слайдере
 const moveAt = evt => {
   const Limits = {
     left: effectLine.offset().left,
@@ -33,6 +34,7 @@ const onChangeValueEffect = newLocation => {
   return value;
 };
 
+// Зависимость положения ползунка от уровня насыщенности эффекта
 const handleChangeSaturationEffect = locationPin => {
   let effectValue = onChangeValueEffect(locationPin);
   effectLevelValue.attr('value', effectValue);
@@ -55,6 +57,7 @@ const onMouseUp = () => {
   $(document).off('mouseup', onMouseUp);
 };
 
+//Сброс всех значений и эффектов
 const resetFiltersOnPhoto = () => {
   scaleControlValue.val('100%');
   scaleControlValue.attr('value', '100%');

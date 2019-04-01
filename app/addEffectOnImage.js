@@ -8,7 +8,7 @@ const EFFECTS = {
   PHOBOS: 'phobos',
   HEAT: 'heat'
 };
-
+// Переключение эффекта при редактировании изображения
 const handleChangeEffect = newEffect => {
   uploadImage.attr('class', 'img-upload__preview');
   $('.effect-level').addClass('hidden');

@@ -9,6 +9,7 @@ const popularPhotos = $('#filter-popular');
 const newPhotos = $('#filter-new');
 const filterDiscussed = $('#filter-discussed');
 
+//Рандомное отображение элементов массива
 const getRandomPhotos = array => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -17,13 +18,14 @@ const getRandomPhotos = array => {
   return array.slice(0, MAX_NEW_PHOTOS);
 };
 
+// Переключение стилей при переключении фильтров на кнопке
 const handlerActiveButton = (targetButton, node) => {
   $('.img-filters__form button').removeClass('img-filters__button--active');
   if (targetButton) {
     node.addClass('img-filters__button--active');
   }
 };
-
+// Рендеринг популярных фото
 const getPopularPhotos = debounce(e => {
   e.preventDefault();
   handlerActiveButton(e.target, popularPhotos);
@@ -33,6 +35,7 @@ const getPopularPhotos = debounce(e => {
   kekstagramService.getPosts().then(data => renderPictures(data));
 });
 
+// Рендеринг новых фото
 const getNewPhotos = debounce(e => {
   e.preventDefault();
   handlerActiveButton(e.target, newPhotos);
@@ -42,6 +45,7 @@ const getNewPhotos = debounce(e => {
   kekstagramService.getPosts().then(data => renderPictures(getRandomPhotos(data)));
 });
 
+// Рендеринг обсуждаемых фото
 const getMoreDiscussed = debounce(e => {
   e.preventDefault();
   handlerActiveButton(e.target, filterDiscussed);

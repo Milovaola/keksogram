@@ -4,6 +4,7 @@ const scaleControlSmall = $('.scale__control--smaller');
 const scaleControlBig = $('.scale__control--bigger');
 const scaleControlValue = $('.scale__control--value');
 
+// Изменение масштаба редактируемого изображения
 const initChangeSize = () => {
   let defaultValue = 100;
   scaleControlValue.val(`${defaultValue}%`);

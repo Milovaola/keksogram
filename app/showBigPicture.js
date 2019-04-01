@@ -4,6 +4,7 @@ const MAX_COMMENTS = 5;
 const mainContainer = $('main');
 const templatePicture = $('.big-picture');
 
+// Рендер ноды с увеличенным пользовательским фото с сервера
 const getBigPicture = data => {
   const bigPicture = templatePicture.clone();
   $(bigPicture).removeClass('hidden');
@@ -20,6 +21,7 @@ const getBigPicture = data => {
     .find('.likes-count')
     .text(data.likes);
 
+  //Рендер комментариев при загрузке фото
   const openComments = commentsObj => {
     let commentsCounter = 0; // Offset counter
 
@@ -34,6 +36,7 @@ const getBigPicture = data => {
     }
     getCommentsCount(countString, commentsObj, commentsCounter);
 
+    // Рендер еще 5 комментариев при нажатии на "Загрузить еще"
     $(commentsLoaderButton).on('click', () => {
       renderCommentNodeList(commentsList, getMoreComments(commentsObj, commentsCounter), commentNode);
       commentsCounter += MAX_COMMENTS;
@@ -55,6 +58,7 @@ const getBigPicture = data => {
   return bigPicture;
 };
 
+// Рендер комментария
 const renderComment = (node, comment) => {
   $(node)
     .find('.social__picture')
@@ -66,20 +70,22 @@ const renderComment = (node, comment) => {
   return node.first();
 };
 
+//Формирование ноды с комментариями
 const renderCommentNodeList = (node, comments, commentNode) => {
   for (let i in comments) {
     $(node).append(renderComment($(commentNode).clone(), comments[i]));
   }
 };
 
+// Функция, ограничивающая количество отображаемых комментариев
 const getMoreComments = ({ comments }, offset) => {
   return comments.slice(offset, offset + MAX_COMMENTS);
 };
 
+// Расчет счетчика комментариев
 const getCommentsCount = (node, { comments }, currentCount) => {
   let availableNumberComments;
 
-  // Можно и нужно упросить расчет счетчика комментариев
   if (currentCount === MAX_COMMENTS) {
     availableNumberComments = MAX_COMMENTS;
   } else if (currentCount < comments.length) {

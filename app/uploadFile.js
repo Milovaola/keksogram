@@ -6,7 +6,6 @@ import { hashtagСheck } from './hashtagCheck';
 
 const popupCreateFoto = $('.img-upload__overlay');
 const closePopupUpladFoto = $('#upload-cancel');
-// const submitForm = $('#upload-submit');
 
 export const popupUploadFoto = () => {
   $('#upload-file').on('change', () => {
@@ -23,6 +22,7 @@ export const popupUploadFoto = () => {
   hidePopup();
 };
 
+// Закрытие попапа редактирования фото
 const hidePopup = () => {
   const onEscRemoveElement = evt => {
     const textNodes = $('.img-upload__text').children();
